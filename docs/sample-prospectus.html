@@ -1,0 +1,254 @@
+
+<!DOCTYPE html><html> <head> <title>School Prospectus</title> <style> body { font-family: Arial, sans-serif; margin: 40px; } h1 { color: #1e40af; } .content { max-width: 800px; margin: 0 auto; } </style> </head> <body> <div class="content"> <h1>Echoes of Joy School Prospectus</h1> <p>This is a placeholder for the school prospectus. In production, this would be a PDF document containing:</p> <ul> <li>School history and mission</li> <li>Academic programs overview</li> <li>Facilities and resources</li> <li>Staff qualifications</li> <li>Extracurricular activities</li> <li>Admissions process</li> <li>Fee structure</li> <li>Contact information</li> </ul> <p><a href="javascript:history.back()">← Back to website</a></p> </div> </body> </html> EOF
+Create deployment script
+cat > deploy.sh << 'EOF'
+#!/bin/bash
+
+Echoes of Joy School - Deployment Script
+Run this script to prepare the website for production
+echo "==========================================="
+echo " PREPARING FOR PRODUCTION DEPLOYMENT"
+echo "==========================================="
+
+echo ""
+echo "Step 1: Validation Check"
+echo "------------------------"
+
+Check required files
+required_files=("index.html" "css/styles.css" "js/main.js" "sitemap.xml" "robots.txt")
+for file in "${required_files[@]}"; do
+if [ -f "$file" ]; then
+echo "✓ $file found"
+else
+echo "✗ $file missing"
+exit 1
+fi
+done
+
+echo ""
+echo "Step 2: Image Optimization Check"
+echo "--------------------------------"
+
+Check image directory
+if [ -d "images" ]; then
+image_count=$(find images -type f 
+−
+n
+a
+m
+e
+"
+∗
+.
+j
+p
+g
+"
+−
+o
+−
+n
+a
+m
+e
+"
+∗
+.
+j
+p
+e
+g
+"
+−
+o
+−
+n
+a
+m
+e
+"
+∗
+.
+p
+n
+g
+"
+−
+o
+−
+n
+a
+m
+e
+"
+∗
+.
+w
+e
+b
+p
+"
+−name"∗.jpg"−o−name"∗.jpeg"−o−name"∗.png"−o−name"∗.webp" | wc -l)
+if [ $image_count -eq 0 ]; then
+echo "⚠ Warning: No images found in images/ directory"
+echo " Please add school photos for:"
+echo " - Campus buildings"
+echo " - Classrooms"
+echo " - Students"
+echo " - Staff"
+echo " - Facilities"
+else
+echo "✓ Found $image_count images"
+fi
+else
+echo "⚠ Warning: images/ directory not found"
+mkdir -p images
+fi
+
+echo ""
+echo "Step 3: Document Check"
+echo "----------------------"
+
+Check document directory
+if [ -d "docs" ]; then
+doc_count=$(find docs -type f 
+−
+n
+a
+m
+e
+"
+∗
+.
+p
+d
+f
+"
+−
+o
+−
+n
+a
+m
+e
+"
+∗
+.
+d
+o
+c
+"
+−
+o
+−
+n
+a
+m
+e
+"
+∗
+.
+d
+o
+c
+x
+"
+−name"∗.pdf"−o−name"∗.doc"−o−name"∗.docx" | wc -l)
+if [ $doc_count -eq 0 ]; then
+echo "⚠ Warning: No documents found in docs/ directory"
+echo " Please add:"
+echo " - School prospectus (PDF)"
+echo " - Fee structure (PDF)"
+echo " - Academic calendar (PDF)"
+echo " - Application forms"
+else
+echo "✓ Found $doc_count documents"
+fi
+else
+echo "⚠ Warning: docs/ directory not found"
+mkdir -p docs
+fi
+
+echo ""
+echo "Step 4: Configuration Updates Required"
+echo "--------------------------------------"
+
+echo "⚠ IMPORTANT: Manual updates needed before deployment:"
+echo ""
+echo "1. CONTACT INFORMATION:"
+echo " - Update phone numbers in index.html"
+echo " - Update email addresses"
+echo " - Update physical address"
+echo ""
+echo "2. EMAIL INTEGRATION:"
+echo " - Sign up for EmailJS (free tier available)"
+echo " - Update js/main.js with your EmailJS credentials"
+echo " - Or configure Formspree as alternative"
+echo ""
+echo "3. GOOGLE ANALYTICS:"
+echo " - Create Google Analytics property"
+echo " - Replace UA-XXXXX-Y with your tracking ID"
+echo ""
+echo "4. SEO CONFIGURATION:"
+echo " - Update meta tags in index.html"
+echo " - Update sitemap.xml with your actual domain"
+echo " - Update robots.txt with your domain"
+echo ""
+echo "5. IMAGE REPLACEMENT:"
+echo " - Replace Unsplash images with actual school photos"
+echo " - Add favicon.ico to images/ directory"
+echo " - Add social media preview images"
+
+echo ""
+echo "Step 5: Production Optimization"
+echo "-------------------------------"
+
+Create minified versions (basic example)
+echo "Creating optimized versions..."
+echo "// Minified CSS placeholder - use CSSNano in production" > css/styles.min.css
+cat css/styles.css >> css/styles.min.css
+
+echo "// Minified JS placeholder - use Terser in production" > js/main.min.js
+cat js/main.js >> js/main.min.js
+
+echo ""
+echo "Step 6: File Permissions"
+echo "------------------------"
+
+Set appropriate permissions
+find . -type f -name "*.html" -exec chmod 644 {} ;
+find . -type f -name "*.css" -exec chmod 644 {} ;
+find . -type f -name "*.js" -exec chmod 644 {} ;
+find . -type d -exec chmod 755 {} ;
+
+echo "✓ File permissions set"
+
+echo ""
+echo "Step 7: Final Checklist"
+echo "-----------------------"
+
+echo "Before uploading to hosting, verify:"
+echo "[ ] All placeholder content replaced"
+echo "[ ] Forms submit to correct email"
+echo "[ ] WhatsApp number is correct"
+echo "[ ] Phone numbers are correct"
+echo "[ ] Images are properly licensed"
+echo "[ ] Documents are up to date"
+echo "[ ] Copyright year is current"
+echo "[ ] Privacy policy link works"
+echo "[ ] Terms of service link works"
+echo "[ ] Social media links are correct"
+
+echo ""
+echo "==========================================="
+echo " DEPLOYMENT PREPARATION COMPLETE"
+echo "==========================================="
+echo ""
+echo "Next steps:"
+echo "1. Review DEPLOYMENT_CHECKLIST.md"
+echo "2. Update configuration as noted above"
+echo "3. Upload files to web hosting"
+echo "4. Test thoroughly"
+echo "5. Update DNS if using new domain"
+echo ""
+echo "For CMS migration, review CMS_MIGRATION_NOTES.md"
